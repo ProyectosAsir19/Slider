@@ -1,0 +1,136 @@
+<script>
+    var actual = 0;
+    function puntos(n){
+      var ptn = document.getElementsByClassName("punto");
+      for(i = 0; i<ptn.length; i++){
+        if(ptn[i].className.includes("activo")){
+          ptn[i].className = ptn[i].className.replace("activo", "");
+          break;
+        }
+      }
+      ptn[n].className += " activo";
+    }
+    function mostrar(n){
+      var imagenes = document.getElementsByClassName("imagen");
+      for(i = 0; i< imagenes.length; i++){
+        if(imagenes[i].className.includes("actual")){
+          imagenes[i].className = imagenes[i].className.replace("actual", "");
+          break;
+        }
+      }
+      actual = n;
+      imagenes[n].className += " actual";
+      puntos(n);
+    }
+
+    function siguiente(){
+      actual++;
+      if(actual > 3){
+        actual = 0;
+      }
+      mostrar(actual);
+    }
+    function anterior(){
+      actual--;
+      if(actual < 0){
+        actual = 3;
+      }
+      mostrar(actual);
+    }
+
+    var velocidad = 2000;
+    var play = setInterval("siguiente()", velocidad);
+
+    function playpause(){
+      var boton = document.getElementById("btn");
+      if(play == null){
+        boton.src = "imagenes/pause.png";
+        play = setInterval("siguiente()", velocidad);
+      } else {
+        clearInterval(play);
+        play = null;
+        boton.src = "imagenes/play.png";
+      }
+    }
+</script>
+
+
+.contenedor {
+  position: relative;
+  width: 700px;
+  height: 300px;
+  background-color: black;
+  border-radius: 15px;
+}
+
+.imagen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.imagen img {
+  height: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.texto {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 85%;
+  color: white;
+  font-weight: bold;
+}
+
+.contenedor a{
+  position: absolute;
+  text-decoration: none;
+  color: white;
+  font-size: 36px;
+  top : 50%;
+  transform: translateY(-50%);
+}
+.siguiente {
+  left: 97%;
+}
+
+.boton {
+  position: absolute;
+  top: 5%;
+  left: 95%;
+}
+
+.puntos {
+  position: absolute;
+  top: 93%;
+  width: 100%;
+  text-align: center;
+}
+.punto {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.punto:hover {
+  cursor: pointer;
+  background-color: gray;
+}
+.contenedor a:hover {
+  color: gray;
+}
+
+.actual {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 1s, opacity 1s;
+}
+.activo {
+  background-color: gray;
+}

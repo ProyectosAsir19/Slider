@@ -1,0 +1,19 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+.caja{
+  width: 60%;
+  height: 400px;
+  margin: auto;
+  padding-top: 190px;
+  margin-left: 390px;
+  text-align: center;
+}
+
+body {
+ background-image: url("img/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
